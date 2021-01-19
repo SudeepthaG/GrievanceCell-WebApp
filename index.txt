@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="page-header">
+    <img src="vjit.png" alt="icon disp" align="left" width="90" height="90">
+    <h3>VIDYA JYOTHI INSTITUTE OF TECHNOLOGY</h3>    
+	<p>An Autonomous Institution</p> 
+  </div>
+
+<div class="jumbotron text-left" style="background-color:hsla(9, 100%, 64%, 0.2);">
+  <h1 style="background-color:hsla(9, 100%, 64%, 0.4); font-family:Times;">GRIEVANCE CELL</h1>
+  <p style="background-color:hsla(9, 100%, 64%, 0.6);">Have Any Complaints?</p> 
+</div>
+  
+<div class="container" style="background-color:hsla(9, 100%, 64%,0.2);">
+  <div class="row">
+    <div class="col-sm-4">
+		<h2>FACULTY</h2>
+		<p>Faculty Can file their grievances here</P>
+      <b><button type="button"  class="btn btn-primary btn-lg" name="FACULTY" onclick="location.href='facultylogin.php'" >Faculty</button></b>
+    </div>
+    <div class="col-sm-4">
+	<h2>PARENT</h2>
+		<p>Parent Can file their grievances here</P>
+      <b><button type="button"  class="btn btn-primary btn-lg" name="PARENT" onclick="location.href='parentlogin.php'" >Parent</button></b>
+	</div>
+    <div class="col-sm-4">
+	<h2>STUDENT</h2>
+		<p>Student Can file their grievances here</P>
+     <b><button type="button" name="STUDENT"  class="btn btn-primary btn-lg" onclick="location.href='studlogin.php'" >Student</button><b>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

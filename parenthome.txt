@@ -1,0 +1,84 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	$roll=$_SESSION['puser'];
+	if(!isset($_SESSION['puser']))
+	{
+		 header("Location: parentlogin.php");
+	}
+    $res=mysqli_query($con,"SELECT * FROM parent WHERE rollno='$roll'");
+	$userRow=mysqli_fetch_assoc($res);
+	
+?>
+<?php
+
+	if(isset($_POST['btn-submit']))
+	{
+		$rollno=mysqli_real_escape_string($con,$roll);
+		$grievanc=mysqli_real_escape_string($con,$_POST['grievanc']);
+		$t=time();
+		$gdate=date("Y-m-d",$t);
+		
+		if( $grievanc=="")
+		{
+				?>
+			<script>alert('Fill grievance field');</script>
+			<?php
+		}
+		else
+		{
+		if(mysqli_query($con,"INSERT INTO grievances(date,id,grievance,gfrom)VALUES('$gdate','$rollno','$grievanc','parent')"))
+		{
+			?>
+			<script>alert('complaint successfully registered');</script>
+			<?php
+		}
+		else
+		{
+				
+		    ?>
+			<script>alert('error while registration');</script>
+			<?php
+		}
+	}
+	}	
+?>
+
+<html>
+	<head>
+	<title>Welcome - <?php echo $userRow["name"]; ?></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="left">
+				<label>Parent Grievances</label>
+			</div>
+ 
+			<div id="right">
+				<div id="content">
+         					Hello  <?php echo $userRow['name']; ?>&nbsp;<a href="parentlogout.php?logout">Sign Out</a>
+        				</div>
+    			</div>
+		</div>
+		<div id="footer"><center>
+		<form method="POST">
+		<table>
+		<tr><td>Name:</td>
+			<td><?php echo  $userRow['name']; ?></td></tr>
+		<tr><td>Student Name:</td>
+			<td><?php echo  $userRow['sname']; ?></td></tr>
+			<tr><td>Student Rollno:</td><td><?php echo $userRow['rollno']; ?></td></tr>
+			<tr><td>Student Year</td><td><?php echo $userRow['year']; ?></td></tr>
+			<tr><td>Student Branch:</td><td><?php echo $userRow['branch']; ?></td></tr>
+			<tr><td>Student Section</td><td><?php echo $userRow['section']; ?></td></tr>
+			<tr><td>GRIEVANCE:
+			
+			</td><td><textarea name="grievanc" rows="10" cols="50"></textarea> </td></tr>
+			</table>
+		<button type="submit" name="btn-submit">Submit</button>	
+</form>		
+		</center></div>
+	
+	</body>
+</html>

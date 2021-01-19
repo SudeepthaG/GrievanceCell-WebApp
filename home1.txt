@@ -1,0 +1,127 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	$id=$_SESSION['auser'];
+	if(!isset($_SESSION['auser']))
+	{
+		 header("Location: adminlogin.php");
+	}
+	 $res=mysqli_query($con,"SELECT * FROM admin WHERE username='$id'");
+	$userRow=mysqli_fetch_assoc($res);
+?>
+
+
+
+<?php
+/*
+if(isset($_POST['btn_all']))
+{
+	$sql = "SELECT * FROM grievances";
+	$result = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($result) > 0) 
+	{
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result))
+		{
+			echo "DATE: " . $row["date"]. "id: " . $row["id"]. " - grievance: " . $row["grievance"]. " from" . $row["gfrom"]. "<br>";
+		}
+	}
+	
+	else
+	{
+		echo "0 results";
+	}
+}
+?>
+
+
+<?php
+
+if(isset($_POST['btn_parent']))
+{
+	$sql = "SELECT * FROM grievances WHERE gfrom='parent'";
+	$result = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($result) > 0) 
+	{
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result))
+		{
+			echo "DATE: " . $row["date"]. "id: " . $row["id"]. " - grievance: " . $row["grievance"]. " from" . $row["gfrom"]. "<br>";
+		}
+	}
+	
+	else
+	{
+		echo "0 results";
+	}
+}
+?>
+
+
+<?php
+
+if(isset($_POST['btn_student']))
+{
+	$sql = "SELECT * FROM grievances WHERE gfrom='student'";
+	$result = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($result) > 0) 
+	{
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result))
+		{
+			echo "DATE: " . $row["date"]. "id: " . $row["id"]. " - grievance: " . $row["grievance"]. " from" . $row["gfrom"]. "<br>";
+		}
+	}
+	
+	else
+	{
+		echo "0 results";
+	}
+}
+?>
+
+
+<?php
+
+if(isset($_POST['btn_faculty']))
+{
+	$sql = "SELECT * FROM grievances WHERE gfrom='faculty'";
+	$result = mysqli_query($con, $sql);
+
+	if (mysqli_num_rows($result) > 0) 
+	{
+		// output data of each row
+		while($row = mysqli_fetch_assoc($result))
+		{
+			echo "DATE: " . $row["date"]. "id: " . $row["id"]. " - grievance: " . $row["grievance"]. " from" . $row["gfrom"]. "<br>";
+		}
+	}
+	
+	else
+	{
+		echo "0 results";
+	}
+}*/
+?>
+
+
+<html>
+	<head><title>Admin home page</title></head>
+	<body>
+			<?php  echo "Username:".$userRow['username'];  ?>
+		<form method="post">
+			<table>
+				<tr>	
+					<td>Grievance of:</td>
+					<td><input type="submit" value="all" name="btn_all"></td>
+					<td><input type="submit" value="student" name="btn_student"></td>
+					<td><input type="submit" value="faculty" name="btn_faculty"></td>
+					<td><input type="submit" value="parent" name="btn_parent"></td>
+				</tr>	
+			</table>
+		</form>	
+	</body>
+</html>

@@ -1,0 +1,67 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	
+	if(isset($_SESSION['auser'])!="")
+	{
+		 header("Location: adminhome.php");
+	}
+	if(isset($_POST['btn-login']))
+	{
+		 $adminid = mysqli_real_escape_string($con,$_POST['adminid']);
+		 $password = mysqli_real_escape_string($con,$_POST['password']);
+		 $res=mysqli_query($con,"SELECT * FROM admin WHERE username='$adminid'");
+		 $row=mysqli_fetch_assoc($res);
+		if($row['password']==$password)
+		 {
+			  ?>
+			  <script>alert('success');</script>
+			 <?php
+			  $_SESSION['auser'] = $row['adminid'];
+			  header("Location: adminhome.php");
+		 }
+		 else
+		 {
+			  ?>
+			  <script>alert('wrong details');</script>
+			 <?php
+		 }
+ 
+	}
+			?>
+<html>
+	<head>
+		<title>Admin Login System</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+	<center>
+	    <div class="page-header">
+           <img src="vjit.png" alt="icon disp" align="center" width="90" height="90">
+           <h3>VIDYA JYOTHI INSTITUTE OF TECHNOLOGY</h3>    
+           <p>An Autonomous Institution</p> 
+        </div>
+
+		<div id="login-form">
+			<form method="post">
+				<table align="center" width="30%" border="0">
+				<tr>
+					<td><input type="text" name="adminid" placeholder="Admin ID" required /></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="password" placeholder="Your Password" required /></td>
+				</tr>
+				<tr>
+					<td><button type="submit" name="btn-login">Sign In</button></td>
+				</tr>
+				</table>
+			</form>
+		</div>
+	</center>
+	</body>
+</html>

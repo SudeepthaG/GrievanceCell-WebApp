@@ -1,0 +1,59 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	
+	if(isset($_SESSION['puser'])!="")
+	{
+		 header("Location: parenthome.php");
+	}
+	if(isset($_POST['btn-login']))
+	{
+		 $rollno = mysqli_real_escape_string($con,$_POST['rollno']);
+		 $password = mysqli_real_escape_string($con,$_POST['password']);
+		 $res=mysqli_query($con,"SELECT * FROM parent WHERE rollno='$rollno'");
+		 $row=mysqli_fetch_assoc($res);
+		if($row['password']==$password)
+		 {
+			  ?>
+			  <script>alert('success');</script>
+			 <?php
+			  $_SESSION['puser'] = $row['rollno'];
+			  header("Location: parenthome.php");
+		 }
+		 else
+		 {
+			  ?>
+			  <script>alert('wrong details');</script>
+			 <?php
+		 }
+ 
+	}
+			?>
+<html>
+	<head>
+		<title>Parent Login & Registration System</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+	<center>
+		<div id="login-form">
+			<form method="post">
+				<table align="center" width="30%" border="0">
+				<tr>
+					<td><input type="text" name="rollno" placeholder="Student Roll No" required /></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="password" placeholder="Your Password" required /></td>
+				</tr>
+				<tr>
+					<td><button type="submit" name="btn-login">Sign In</button></td>
+				</tr>
+				<tr>
+					<td><a href="parentreg.php">Sign Up Here</a></td>
+				</tr>
+				</table>
+			</form>
+		</div>
+	</center>
+	</body>
+</html>

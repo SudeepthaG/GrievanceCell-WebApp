@@ -1,0 +1,56 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	
+	if(isset($_SESSION['fuser'])!="")
+	{
+		 header("Location: facultyhome.php");
+	}
+	if(isset($_POST['btn-login']))
+	{
+		 $facultyid = mysqli_real_escape_string($con,$_POST['facultyid']);
+		 $password = mysqli_real_escape_string($con,$_POST['password']);
+		 $res=mysqli_query($con,"SELECT * FROM faculty WHERE facultyid='$facultyid'");
+		 $row=mysqli_fetch_assoc($res);
+		if($row['password']==$password)
+		 {
+			  ?>
+			  <script>alert('success');</script>
+			 <?php
+			  $_SESSION['fuser'] = $row['facultyid'];
+			  header("Location: facultyhome.php");
+		 }
+		 else
+		 {
+			  ?>
+			  <script>alert('wrong details');</script>
+			 <?php
+		 }
+ 
+	}
+			?>
+<html>
+	<head>
+		<title>Faculty Login System</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+	<center>
+		<div id="login-form">
+			<form method="post" >
+				<table align="center" width="30%" border="0">
+				<tr>
+					<td><input type="text" name="facultyid" placeholder="Faculty ID" required /></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="password" placeholder="Your Password" required /></td>
+				</tr>
+				<tr>
+					<td><button type="submit" name="btn-login">Sign In</button></td>
+				</tr>
+				</table>
+			</form>
+		</div>
+	</center>
+	</body>
+</html>

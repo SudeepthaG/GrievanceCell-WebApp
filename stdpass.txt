@@ -1,0 +1,55 @@
+<?php
+	session_start();
+	include_once 'dbconnect.php';
+	
+	if(isset($_SESSION['spuser'])!="")
+	{
+		 header("Location: home.php");
+	}
+	if(isset($_POST['btn-login']))
+	{
+		 $rollno = mysqli_real_escape_string($con,$_POST['rollno']);
+		 $password = mysqli_real_escape_string($con,$_POST['password']);
+		 $res=mysqli_query($con,"SELECT * FROM student WHERE rollno='$rollno'");
+		 $row=mysqli_fetch_assoc($res);
+		if($row['password']==$password)
+		 {
+			  ?>
+			  <script>alert('success');</script>
+			 <?php
+			  $_SESSION['user'] = $row['rollno'];
+			  header("Location: home.php");
+		 }
+		 else
+		 {
+			  ?>
+			  <script>alert('wrong details');</script>
+			 <?php
+		 }
+ 
+	}
+			?>
+<html>
+	<head>
+		<title>Password Retreival System For Student</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body >
+    <center>
+		<div style="margin-top:100px;">
+			<form method="post" >
+				<table width="30%" border="0">
+				<tr>
+					<td><input type="email" name="email" placeholder="Your E-mail Id" required /></td>
+				</tr>
+				
+				<tr>
+					<td><button type="submit" name="btn-login">Send Password</button></td>
+				</tr>
+				
+				</table>
+			</form>
+		</div>
+	</center>
+	</body>
+</html>

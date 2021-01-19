@@ -1,0 +1,201 @@
+
+<html>
+	<head><title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div id="header">
+			<div id="left">
+				<label>Grievances</label>
+			</div>
+ 
+			<div id="right">
+				<div id="content">
+         					Hello  &nbsp;<a href="adminlogout.php">Sign Out</a>
+        				</div>
+    			</div>
+		</div>
+		<div id="footer"><center>
+
+		<form method="post">
+			<table>
+				<tr>	
+					<td>Grievance of:</td>
+					<td><input type="submit" value="ALL" name="btn_all" style="padding: 20px 40px; border-radius:10%; background-color: #4CAF50; font-size:20px ;border: none;color: white"></td>
+					<td><input type="submit" value="STUDENT" name="btn_student" style="padding: 20px 40px; border-radius:10%; background-color: #4CAF50; font-size:20px ;border: none;color: white"></td>
+					<td><input type="submit" value="FACULTY" name="btn_faculty" style="padding: 20px 40px; border-radius:10%; background-color: #4CAF50; font-size:20px ;border: none;color: white"></td>
+					<td><input type="submit" value="PARENT" name="btn_parent" style="padding: 20px 40px; border-radius:10%; background-color: #4CAF50; font-size:20px ;border: none;color: white"></td>
+				</tr>	
+			</table>
+		</form>	
+		<table class="table table-hover">
+		<?php
+	
+	
+	
+		if(isset($_POST['btn_all']))
+		getAll();
+		function getAll()
+		{
+		$servername="localhost";
+		$username="root";
+		$password="";
+		$dbname="project";
+		
+		//$srno=$_POST['rno'];
+
+		$conn=mysqli_connect($servername,$username,$password,$dbname);
+		if(!$conn)
+		{
+		die("connection failed:".mysqli_connect_error());
+		}
+		$sql="SELECT * FROM grievances";
+		$result=mysqli_query($conn,$sql);
+        if(mysqli_num_rows($result)>0)
+		{
+			?><tr><td>DATE</td><td>ID</td><td>FROM</td><td>GRIEVANCE</td></tr>
+			<?php
+		while($row=mysqli_fetch_assoc($result))
+		{
+			?>
+			<tr><td><?php  echo $row["date"]?></td>
+				<td><?php echo $row["id"]?></td>
+				<td><?php echo $row["gfrom"]?></td>
+				<td><?php echo $row["grievance"]?></td>
+			</tr>
+		<?php
+		}
+		}
+		else
+		echo"0 results";
+		mysqli_close($conn);
+		}
+
+		
+		if(isset($_POST['btn_faculty']))
+		getFaculty();
+		function getFaculty()
+		{
+		$servername="localhost";
+		$username="root";
+		$password="";
+		$dbname="project";
+		
+		//$srno=$_POST['rno'];
+
+		$conn=mysqli_connect($servername,$username,$password,$dbname);
+		if(!$conn)
+		{
+		die("connection failed:".mysqli_connect_error());
+		}
+		$sql="SELECT * FROM grievances WHERE gfrom='faculty'";
+		$result=mysqli_query($conn,$sql);
+         if(mysqli_num_rows($result)>0)
+		{
+			?><tr><td>DATE</td><td>ID</td><td>FROM</td><td>GRIEVANCE</td></tr>
+			<?php
+		while($row=mysqli_fetch_assoc($result))
+		{
+			?>
+			<tr><td><?php  echo $row["date"]?></td>
+				<td><?php echo $row["id"]?></td>
+				<td><?php echo $row["gfrom"]?></td>
+			<td><?php echo $row["grievance"]?></td>
+				</tr>
+		<?php
+		}
+		}
+		
+		else
+		echo"0 results";
+		mysqli_close($conn);
+		}
+
+		
+		if(isset($_POST['btn_student']))
+		getStudent();
+		function getStudent()
+		{
+		$servername="localhost";
+		$username="root";
+		$password="";
+		$dbname="project";
+		
+		//$srno=$_POST['rno'];
+
+		$conn=mysqli_connect($servername,$username,$password,$dbname);
+		if(!$conn)
+		{
+		die("connection failed:".mysqli_connect_error());
+		} 
+		$sql="SELECT * FROM grievances WHERE gfrom='student'";
+		$result=mysqli_query($conn,$sql);
+         if(mysqli_num_rows($result)>0)
+		{
+			?><tr><td>DATE</td><td>ID</td><td>FROM</td><td>GRIEVANCE</td></tr>
+			<?php
+		while($row=mysqli_fetch_assoc($result))
+		{
+			?>
+			<tr><td><?php  echo $row["date"]?></td>
+				<td><?php echo $row["id"]?></td>
+				<td><?php echo $row["gfrom"]?></td>
+			<td><?php echo $row["grievance"]?></td>
+				</tr>
+		<?php
+		}
+		}
+		else
+		echo"0 results";
+		mysqli_close($conn);
+		}
+
+		
+		if(isset($_POST['btn_parent']))
+		getParent();
+		function getParent()
+		{
+		$servername="localhost";
+		$username="root";
+		$password="";
+		$dbname="project";
+		
+		//$srno=$_POST['rno'];
+
+		$conn=mysqli_connect($servername,$username,$password,$dbname);
+		if(!$conn)
+		{
+		die("connection failed:".mysqli_connect_error());
+		}
+		$sql="SELECT * FROM grievances WHERE gfrom='parent'";
+		$result=mysqli_query($conn,$sql);
+         if(mysqli_num_rows($result)>0)
+		{
+			?><tr><td>DATE</td><td>ID</td><td>FROM</td><td>GRIEVANCE</td></tr>
+			<?php
+		while($row=mysqli_fetch_assoc($result))
+		{
+			?>
+			<tr><td><?php  echo $row["date"]?></td>
+				<td><?php echo $row["id"]?></td>
+				<td><?php echo $row["gfrom"]?></td>
+				<td><?php echo $row["grievance"]?></td>
+				
+			</tr>
+		<?php
+		}
+		}
+		else
+		echo"0 results";
+		mysqli_close($conn);
+		}
+
+?>
+</table>
+	</body>
+</html>
