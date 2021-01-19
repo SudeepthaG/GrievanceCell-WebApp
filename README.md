@@ -8,4 +8,3 @@ Initially, the colelge had a paper-based grievance system. This webapp was devel
 3.Student module  
 4.Parent module 
 
-I have attached screenshots of the webapp post development in the screenshots folder.
